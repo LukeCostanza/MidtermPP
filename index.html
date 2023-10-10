@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <title>NEIU Campus Map</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	
+</head>
+	<body>
+		<div id="map"></div>
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+		<script>
+			const locations = [
+				{
+					name: "Building E",
+					description: "This is the Fine Arts facility.",
+					coordinates: [41.981727, -87.719167]
+				},
+				{
+					name: "Cafeteria",
+					description: "Enjoy a meal at our campus cafeteria.",
+					coordinates: [41.9812635,-87.7186134]
+				},
+				{
+					name: "Library",
+					description: "The campus library is a great resource for research.",
+					coordinates: [41.9803871,-87.7191892]
+				},
+				{
+					name: "Building B",
+					description: "Houses many of the campus offices.",
+					coordinates: [41.9811122,-87.717409]
+				},
+				{
+					name: "Parking Facility",
+					description: "This is the main parking area for students.",
+					coordinates: [41.9803393,-87.720412]
+				}
+			];
+
+			const map = L.map('map').setView([41.980260, -87.718509], 17);
+
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+			}).addTo(map);
+
+			locations.forEach(location => {
+				const marker = L.marker(location.coordinates).addTo(map);
+				marker.bindPopup(`<h3>${location.name}</h3><p>${location.description}</p>`);
+			});
+			
+		</script>
+	</body>
+</html>
